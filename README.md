@@ -38,3 +38,14 @@ Cloudflare가 자동 배포합니다.
 - 각 서비스 상세페이지 카카오톡 상담 버튼
 - 모바일/PC 고정 플로팅 상담 버튼
 - 세금계산서 발행 가능 / 작업 완료 후 후불 정산 기본 안내 문구 추가
+
+
+## 주문 접수 이메일 자동 알림
+주문이 D1에 정상 저장된 직후 Resend API를 통해 관리자 이메일로 자동 알림을 보냅니다. 이메일 발송이 실패해도 주문 접수 자체는 정상 완료됩니다.
+
+Cloudflare Worker → Settings → Runtime variables and secrets에 아래 값을 추가하세요.
+- `RESEND_API_KEY` : Secret / Resend에서 발급한 API Key
+- `ORDER_NOTIFY_EMAIL` : 주문 알림을 받을 이메일 주소
+- `ORDER_FROM_EMAIL` : 발신자 주소(권장: `HASON COMPANY <orders@hasoncompany.kr>`). 미설정 시 테스트용 `HASON COMPANY <onboarding@resend.dev>` 사용
+
+실서비스에서는 Resend에서 `hasoncompany.kr` 도메인을 인증한 뒤 `ORDER_FROM_EMAIL`을 설정하는 것을 권장합니다. 기존 `ADMIN_TOKEN`, `DB`, `ASSETS` 설정은 그대로 유지하세요.
