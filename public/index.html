@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HASON COMPANY 서비스몰</title>
+<style>
+:root{--bg:#f5f1e8;--paper:#fffdf8;--ink:#161b18;--muted:#6c746e;--line:#ded7ca;--green:#0b5946;--green2:#0e7057;--sand:#e8dfd1;--gold:#b69b69}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:Pretendard,"Noto Sans KR",Arial,sans-serif}
+a{text-decoration:none;color:inherit}button,input,select,textarea{font:inherit}
+header{position:sticky;top:0;z-index:20;background:rgba(250,247,240,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{max-width:1180px;margin:auto;height:72px;padding:0 22px;display:flex;align-items:center;gap:24px}
+.brand{font-family:Georgia,serif;font-size:24px;letter-spacing:.04em}.brand span{font-family:inherit;font-size:16px;margin-left:10px}
+.navlinks{display:flex;gap:20px;margin-left:auto;font-size:13px;font-weight:800;color:#465049}
+.nav .cta{border:0;border-radius:999px;padding:11px 16px;background:var(--green);color:#fff;font-weight:900}
+.hero{max-width:1180px;margin:0 auto;padding:54px 22px 34px;display:grid;grid-template-columns:1.05fr .95fr;gap:34px;align-items:stretch}
+.heroCopy{padding:26px 0}.kicker{font-size:12px;color:#697069;letter-spacing:.06em}
+h1{font-size:54px;line-height:1.04;letter-spacing:-2.2px;margin:12px 0 18px}.accent{color:var(--green)}
+.lead{font-size:17px;line-height:1.7;color:#505852;max-width:650px}.actions{display:flex;gap:10px;margin-top:24px;flex-wrap:wrap}
+.btn{border:1px solid #bdb5a8;background:#fffdf9;border-radius:999px;padding:12px 18px;font-weight:900;cursor:pointer}.btn.primary{background:var(--green);color:white;border-color:var(--green)}
+.heroArt{border-radius:28px;min-height:330px;background:
+linear-gradient(135deg,rgba(244,238,226,.2),rgba(11,89,70,.06)),
+radial-gradient(circle at 70% 30%,#e9e0d2,transparent 26%),
+linear-gradient(135deg,#d8cab8,#f8f4ec);position:relative;overflow:hidden;border:1px solid #dbd2c4}
+.heroArt:before{content:"";position:absolute;left:18%;top:0;width:38%;height:100%;background:rgba(255,255,255,.52);clip-path:polygon(20% 0,100% 0,72% 100%,0 100%)}
+.heroArt:after{content:"Good Service\A Better Business";white-space:pre;position:absolute;right:36px;top:50px;font-family:Georgia,serif;font-size:30px;line-height:1.05;color:#6d5b42}
+.plant{position:absolute;left:42%;bottom:-20px;width:170px;height:230px;border-radius:48% 52% 44% 56%;background:radial-gradient(ellipse at 55% 45%,#7a8e67 0 9%,transparent 10%),radial-gradient(ellipse at 35% 60%,#58734f 0 8%,transparent 9%),radial-gradient(ellipse at 65% 68%,#385f45 0 8%,transparent 9%);opacity:.9}
+.section{max-width:1180px;margin:auto;padding:26px 22px 70px}.sectionHead{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:18px}.sectionHead h2{font-size:32px;letter-spacing:-1.2px;margin:0}.sectionHead p{margin:0;color:var(--muted);font-size:14px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}.tab{border:0;border-radius:999px;background:#e9e3d9;padding:9px 16px;font-weight:900;color:#515851;cursor:pointer}.tab.active{background:var(--green);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}.card{background:var(--paper);border:1px solid var(--line);border-radius:17px;padding:12px;transition:.2s;box-shadow:0 10px 25px rgba(39,34,27,.035);cursor:pointer}.card:hover{transform:translateY(-3px)}
+.thumb{height:120px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#ebe5dc,#f8f5ef);font-size:36px}.card h3{font-size:16px;margin:12px 0 8px}.card p{font-size:12px;line-height:1.5;color:#70766f;min-height:36px;margin:0 0 12px}.price{display:flex;justify-content:space-between;align-items:center;font-weight:900}.price strong{font-size:18px}.go{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:#c2ad86;color:white}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:28px}.panel{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:22px}
+.panel h3{margin:0 0 4px;font-size:22px}.panel .sub{color:var(--muted);font-size:13px;margin-bottom:14px}
+.field{margin-top:12px}.field label{display:block;font-size:12px;font-weight:900;margin-bottom:6px}.field input,.field select,.field textarea{width:100%;border:1px solid #d5cec2;border-radius:10px;background:#fff;padding:11px 12px;font-size:13px}.field textarea{min-height:90px;resize:vertical}.twocol{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.submit{width:100%;margin-top:14px;background:var(--green);color:#fff;border:0;border-radius:11px;padding:13px;font-weight:900;cursor:pointer}
+.result{display:none;margin-top:15px;padding:14px;border-radius:12px;background:#edf6f2;border:1px solid #bcd9cd;font-size:13px;line-height:1.6}.result.show{display:block}.error{background:#fff1f1;border-color:#e5bcbc}
+.steps{display:grid;gap:10px;margin-top:14px}.step{display:flex;gap:12px;padding:13px;border-radius:14px;background:#f6f2eb}.num{width:30px;height:30px;border-radius:9px;background:var(--green);color:#fff;display:grid;place-items:center;font-weight:900;flex:0 0 30px}.step b{display:block;font-size:14px}.step span{font-size:12px;color:#727872}
+.note{margin-top:14px;padding:13px;border-radius:12px;background:#f0eadf;color:#625f58;font-size:12px;line-height:1.6}
+footer{border-top:1px solid var(--line);padding:30px 22px;color:#777c75;font-size:12px}.foot{max-width:1180px;margin:auto}
+@media(max-width:980px){.grid{grid-template-columns:repeat(3,1fr)}.hero{grid-template-columns:1fr}.heroArt{min-height:260px}.split{grid-template-columns:1fr}.navlinks{display:none}}
+@media(max-width:640px){h1{font-size:38px}.hero{padding-top:36px}.grid{grid-template-columns:1fr 1fr}.sectionHead{display:block}.sectionHead p{margin-top:6px}.twocol{grid-template-columns:1fr}.brand{font-size:20px}.heroArt:after{font-size:23px;right:22px}.nav{padding:0 14px}.section,.hero{padding-left:14px;padding-right:14px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <div class="brand">HASON COMPANY <span>서비스몰</span></div>
+    <nav class="navlinks"><a href="#services">서비스</a><a href="#order">신청</a><a href="#lookup">주문조회</a><a href="/admin.html">관리자</a></nav>
+    <button class="cta" onclick="document.getElementById('order').scrollIntoView({behavior:'smooth'})">빠른 신청</button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="heroCopy">
+    <div class="kicker">비즈니스를 더 가볍게, 성장을 더 빠르게</div>
+    <h1>필요한 서비스만 골라<br><span class="accent">빠르게 신청하세요.</span></h1>
+    <p class="lead">홈페이지 제작, 보도자료, 회사소개서, 대표자 브랜딩까지. 필요한 서비스를 상품처럼 선택하고 온라인으로 접수할 수 있습니다.</p>
+    <div class="actions"><a class="btn primary" href="#services">서비스 둘러보기 →</a><a class="btn" href="#lookup">주문 조회</a></div>
+  </div>
+  <div class="heroArt"><div class="plant"></div></div>
+</section>
+
+<section class="section" id="services">
+  <div class="sectionHead"><div><h2>서비스를 골라보세요</h2><p>카드를 누르면 주문서에 자동으로 선택됩니다.</p></div></div>
+  <div class="tabs"><button class="tab active" data-cat="전체">전체</button><button class="tab" data-cat="홈페이지">홈페이지</button><button class="tab" data-cat="콘텐츠">콘텐츠</button><button class="tab" data-cat="브랜딩">브랜딩</button></div>
+  <div class="grid">
+    <article class="card" data-cat="홈페이지" data-service="반응형 홈페이지 제작"><div class="thumb">💻</div><h3>반응형 홈페이지 제작</h3><p>회사·학원·매장·전문가용 소개형 홈페이지</p><div class="price"><span><strong>190,000원</strong>부터</span><span class="go">→</span></div></article>
+    <article class="card" data-cat="콘텐츠" data-service="기업 보도자료 작성"><div class="thumb">📰</div><h3>기업 보도자료 작성</h3><p>기업 소식·대표자 인터뷰·신규 서비스 기사형 원고</p><div class="price"><span><strong>79,000원</strong>부터</span><span class="go">→</span></div></article>
+    <article class="card" data-cat="콘텐츠" data-service="회사소개서·제안서 PPT"><div class="thumb">📊</div><h3>회사소개서·제안서 PPT</h3><p>자료 정리부터 문구와 페이지 구성까지</p><div class="price"><span><strong>290,000원</strong>부터</span><span class="go">→</span></div></article>
+    <article class="card" data-cat="브랜딩" data-service="대표자 프로필 원고"><div class="thumb">👤</div><h3>대표자 프로필 원고</h3><p>대표·강사·작가·전문가용 브랜딩 콘텐츠</p><div class="price"><span><strong>99,000원</strong>부터</span><span class="go">→</span></div></article>
+    <article class="card" data-cat="콘텐츠" data-service="홈페이지 문구 작성"><div class="thumb">✍️</div><h3>홈페이지 문구 작성</h3><p>회사소개·서비스소개·대표자 인사말 정리</p><div class="price"><span><strong>69,000원</strong>부터</span><span class="go">→</span></div></article>
+  </div>
+
+  <div class="split">
+    <div class="panel" id="order">
+      <h3>서비스 신청</h3><div class="sub">접수 완료 시 주문번호가 발급되고 실제 DB에 저장됩니다.</div>
+      <form id="orderForm">
+        <div class="field"><label>서비스 선택</label><select name="service" id="service" required><option value="">서비스를 선택해주세요.</option><option>반응형 홈페이지 제작</option><option>기업 보도자료 작성</option><option>회사소개서·제안서 PPT</option><option>대표자 프로필 원고</option><option>홈페이지 문구 작성</option></select></div>
+        <div class="twocol"><div class="field"><label>업체명</label><input name="company" required placeholder="업체명"></div><div class="field"><label>담당자명</label><input name="name" required placeholder="성함"></div></div>
+        <div class="twocol"><div class="field"><label>연락처</label><input name="phone" required placeholder="010-0000-0000"></div><div class="field"><label>이메일</label><input name="email" type="email" placeholder="hello@example.com"></div></div>
+        <div class="field"><label>요청사항</label><textarea name="request" placeholder="원하시는 구성, 일정, 참고 링크 등을 적어주세요."></textarea></div>
+        <button class="submit" type="submit">신청서 제출 →</button>
+      </form>
+      <div id="orderResult" class="result"></div>
+    </div>
+
+    <div class="panel" id="lookup">
+      <h3>주문 조회</h3><div class="sub">주문번호와 접수할 때 입력한 연락처로 진행상태를 확인할 수 있습니다.</div>
+      <form id="lookupForm">
+        <div class="field"><label>주문번호</label><input name="id" required placeholder="예: HC20260910-AB12CD"></div>
+        <div class="field"><label>연락처</label><input name="phone" required placeholder="010-0000-0000"></div>
+        <button class="submit" type="submit">진행상태 조회</button>
+      </form>
+      <div id="lookupResult" class="result"></div>
+      <div class="steps">
+        <div class="step"><div class="num">1</div><div><b>접수</b><span>신청 내용을 확인합니다.</span></div></div>
+        <div class="step"><div class="num">2</div><div><b>작업중</b><span>자료를 바탕으로 제작을 진행합니다.</span></div></div>
+        <div class="step"><div class="num">3</div><div><b>수정중</b><span>확인 후 수정 요청을 반영합니다.</span></div></div>
+        <div class="step"><div class="num">4</div><div><b>완료</b><span>최종 결과물을 전달합니다.</span></div></div>
+      </div>
+      <div class="note">현재 버전은 주문 저장·조회·관리자 상태 변경까지 작동하도록 만든 운영형 MVP입니다. 카드 결제는 PG 계약 후 다음 단계에서 연결하면 됩니다.</div>
+    </div>
+  </div>
+</section>
+
+<footer><div class="foot"><b>HASON COMPANY</b><br><br>서비스 신청 정보는 주문 처리 목적으로 저장됩니다.</div></footer>
+
+<script>
+const tabs=[...document.querySelectorAll('.tab')], cards=[...document.querySelectorAll('.card')];
+tabs.forEach(t=>t.onclick=()=>{tabs.forEach(x=>x.classList.remove('active'));t.classList.add('active');const c=t.dataset.cat;cards.forEach(card=>card.style.display=(c==='전체'||card.dataset.cat===c)?'':'none')});
+cards.forEach(card=>card.onclick=()=>{document.getElementById('service').value=card.dataset.service;document.getElementById('order').scrollIntoView({behavior:'smooth'})});
+
+const show=(el,msg,error=false)=>{el.className='result show'+(error?' error':'');el.innerHTML=msg};
+document.getElementById('orderForm').addEventListener('submit',async e=>{
+ e.preventDefault(); const btn=e.submitter; btn.disabled=true; btn.textContent='접수 중...';
+ const data=Object.fromEntries(new FormData(e.currentTarget).entries());
+ try{
+   const r=await fetch('/api/orders',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
+   const j=await r.json(); if(!r.ok) throw new Error(j.error||'접수에 실패했습니다.');
+   show(document.getElementById('orderResult'),`<b>접수가 완료되었습니다.</b><br>주문번호: <b>${j.id}</b><br>현재 상태: ${j.status}<br><br>주문번호를 꼭 보관해 주세요.`);
+   e.currentTarget.reset();
+ }catch(err){show(document.getElementById('orderResult'),err.message,true)}
+ finally{btn.disabled=false;btn.textContent='신청서 제출 →'}
+});
+document.getElementById('lookupForm').addEventListener('submit',async e=>{
+ e.preventDefault(); const data=Object.fromEntries(new FormData(e.currentTarget).entries());
+ try{
+   const q=new URLSearchParams(data); const r=await fetch('/api/order?'+q.toString()); const j=await r.json();
+   if(!r.ok) throw new Error(j.error||'조회에 실패했습니다.');
+   show(document.getElementById('lookupResult'),`<b>${j.id}</b><br>서비스: ${j.service}<br>업체명: ${j.company}<br>진행상태: <b>${j.status}</b><br>접수일: ${new Date(j.created_at).toLocaleString('ko-KR')}${j.admin_memo?'<br>안내: '+j.admin_memo:''}`);
+ }catch(err){show(document.getElementById('lookupResult'),err.message,true)}
+});
+</script>
+</body></html>
