@@ -4,7 +4,7 @@
 <header class="site-head"><div class="nav">
       <a class="brand" href="/">HASON COMPANY <span>서비스몰</span></a>
       <nav class="navlinks">
-        <a href="/#services">서비스</a><a href="/#order">신청</a><a href="/#lookup">주문조회</a><a href="/admin.html">관리자</a>
+        <a href="/#services">서비스</a><a href="/#order">신청</a><a href="/#lookup">주문조회</a><a href="/admin.html">관리자</a><a href="https://open.kakao.com/o/silMvyJi" target="_blank" rel="noopener">상담문의</a>
       </nav>
       <a class="pill" href="/#order">빠른 신청</a>
     </div></header>
@@ -13,7 +13,7 @@
   <div class="hero-copy"><div class="kicker">비즈니스를 더 가볍게, 성장을 더 빠르게</div>
     <h1>필요한 서비스만 골라<br><span class="accent">빠르게 신청하세요.</span></h1>
     <p class="lead">홈페이지 제작부터 보도자료, 회사소개서, 대표자 브랜딩, 위키 문서 초안까지. 가격과 범위를 먼저 확인하고 온라인으로 간편하게 접수할 수 있습니다.</p>
-    <div class="actions"><a class="btn primary" href="#services">서비스 둘러보기 →</a><a class="btn" href="#order">맞춤 상담 신청</a></div>
+    <div class="actions"><a class="btn primary" href="#services">서비스 둘러보기 →</a><a class="btn" href="#order">맞춤 상담 신청</a><a class="kakao-link" href="https://open.kakao.com/o/silMvyJi" target="_blank" rel="noopener">카톡 상담하기</a></div>
   </div>
   <div class="hero-art"><div class="plant"></div></div>
 </section>
@@ -89,7 +89,11 @@
         <input type="hidden" id="selectedOption" value=""><input type="hidden" id="selectedPrice" value="">
         <div class="field"><label>요청사항</label><textarea name="request" placeholder="원하시는 구성, 일정, 참고 링크 등을 적어주세요."></textarea></div>
         <button class="submit" type="submit">신청서 제출 →</button>
-      </form><div id="orderResult" class="result"></div>
+      </form><div id="orderResult" class="result"></div><div class="payment-note">
+<strong>결제 안내</strong>
+현재는 온라인 신청 후 작업 범위를 확인한 뒤 진행합니다. 사업자 고객은 세금계산서 발행이 가능하며,
+기본적으로 작업 완료 후 후불 정산으로 진행합니다. 다만 작업 범위가 크거나 외부 비용이 발생하는 경우 일부 선결제를 요청드릴 수 있습니다.
+</div>
     </section>
 
     <section class="panel" id="lookup"><h3>주문 조회</h3><div class="sub">주문번호와 접수할 때 입력한 연락처로 진행상태를 확인할 수 있습니다.</div>
@@ -125,4 +129,7 @@ document.getElementById('orderForm').addEventListener('submit',async e=>{
  try{const r=await fetch('/api/orders',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});const j=await r.json();if(!r.ok)throw new Error(j.error||'접수에 실패했습니다.');show(document.getElementById('orderResult'),`<b>접수가 완료되었습니다.</b><br>주문번호: <b>${j.id}</b><br>현재 상태: ${j.status}<br><br>주문번호를 꼭 보관해 주세요.`);form.reset();document.getElementById('choiceSummary').classList.remove('show');history.replaceState(null,'',location.pathname+'#order');}catch(err){show(document.getElementById('orderResult'),err.message,true)}finally{btn.disabled=false;btn.textContent='신청서 제출 →'}
 });
 document.getElementById('lookupForm').addEventListener('submit',async e=>{e.preventDefault();const data=Object.fromEntries(new FormData(e.currentTarget).entries());try{const r=await fetch('/api/order?'+new URLSearchParams(data));const j=await r.json();if(!r.ok)throw new Error(j.error||'조회에 실패했습니다.');show(document.getElementById('lookupResult'),`<b>${j.id}</b><br>서비스: ${j.service}<br>업체명: ${j.company}<br>진행상태: <b>${j.status}</b><br>접수일: ${new Date(j.created_at).toLocaleString('ko-KR')}${j.admin_memo?'<br>안내: '+j.admin_memo:''}`);}catch(err){show(document.getElementById('lookupResult'),err.message,true)}});
-</script></body></html>
+</script><a class="kakao-float" href="https://open.kakao.com/o/silMvyJi" target="_blank" rel="noopener" aria-label="카카오톡 상담">
+  <span class="kdot">K</span><span>카카오톡 상담</span>
+</a>
+</body></html>
