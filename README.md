@@ -23,3 +23,9 @@ GitHub `hason-service-mall` 저장소 루트에 이 ZIP을 풀어 나온 내용�
 Cloudflare가 자동 배포합니다.
 
 `ADMIN_TOKEN`은 Runtime variables and secrets에 Secret으로 유지하세요.
+
+
+## 추가 수정 사항
+- 메인 서비스 카드 9종에 실사형 이미지 적용
+- 각 서비스 상세페이지 상단 비주얼에 동일한 서비스 이미지 적용
+- 이미지 파일 경로: `public/assets/services/*.png`
