@@ -112,15 +112,24 @@ cards.forEach(card=>card.onclick=()=>{document.getElementById('service').value=c
 
 const show=(el,msg,error=false)=>{el.className='result show'+(error?' error':'');el.innerHTML=msg};
 document.getElementById('orderForm').addEventListener('submit',async e=>{
- e.preventDefault(); const btn=e.submitter; btn.disabled=true; btn.textContent='접수 중...';
- const data=Object.fromEntries(new FormData(e.currentTarget).entries());
+ e.preventDefault();
+ const form=e.currentTarget;
+ const btn=e.submitter;
+ btn.disabled=true;
+ btn.textContent='접수 중...';
+ const data=Object.fromEntries(new FormData(form).entries());
  try{
    const r=await fetch('/api/orders',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
-   const j=await r.json(); if(!r.ok) throw new Error(j.error||'접수에 실패했습니다.');
+   const j=await r.json();
+   if(!r.ok) throw new Error(j.error||'접수에 실패했습니다.');
    show(document.getElementById('orderResult'),`<b>접수가 완료되었습니다.</b><br>주문번호: <b>${j.id}</b><br>현재 상태: ${j.status}<br><br>주문번호를 꼭 보관해 주세요.`);
-   e.currentTarget.reset();
- }catch(err){show(document.getElementById('orderResult'),err.message,true)}
- finally{btn.disabled=false;btn.textContent='신청서 제출 →'}
+   form.reset();
+ }catch(err){
+   show(document.getElementById('orderResult'),err.message,true);
+ }finally{
+   btn.disabled=false;
+   btn.textContent='신청서 제출 →';
+ }
 });
 document.getElementById('lookupForm').addEventListener('submit',async e=>{
  e.preventDefault(); const data=Object.fromEntries(new FormData(e.currentTarget).entries());
