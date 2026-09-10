@@ -6,5 +6,12 @@
   "assets": {
     "directory": "./public",
     "binding": "ASSETS"
-  }
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "hason-orders",
+      "database_id": "0b7d83aa-a49c-49a5-b0b8-896b34b8fe50"
+    }
+  ]
 }

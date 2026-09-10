@@ -1,28 +1,25 @@
-# HASON COMPANY 서비스몰 - Cloudflare Workers용
+# HASON COMPANY 서비스몰 - 통합 확장 버전
 
-현재 생성된 `hason-service-mall` Workers 프로젝트에 맞춘 버전입니다.
+## 추가된 서비스 상세페이지
+- 반응형 홈페이지 제작
+- 기업 보도자료 작성
+- 회사소개서·제안서 PPT
+- 대표자 프로필·인터뷰 원고
+- 홈페이지 문구 작성
+- 브랜드 컨설팅
+- 나무위키 문서 작성·정리
+- 위키백과 등재 검토·초안
+- 기업 블로그 콘텐츠 작성
 
-## 구성
-- src/worker.js : 주문 API + 관리자 API + 정적파일 라우팅
-- public/index.html : 서비스몰 메인
-- public/admin.html : 관리자 페이지
-- schema.sql : D1 주문 테이블
-- wrangler.jsonc : Workers + Static Assets 설정
-- package.json : Wrangler 배포 설정
+## 추가 기능
+- 각 서비스별 독립 상세페이지
+- 각 상세페이지 3단계 가격 옵션
+- 상세페이지 옵션 선택 → 메인 주문서 자동 반영
+- 이용안내 / 개인정보처리방침 / 취소·환불 기준 페이지
+- D1 바인딩이 wrangler.jsonc에 포함되어 재배포 후에도 유지
 
-## 다음 순서
-1. GitHub 저장소의 기존 파일을 이 ZIP 내용으로 교체
-2. Cloudflare에서 D1 DB 생성
-3. schema.sql 실행
-4. h​ason-service-mall > Bindings > Add binding > D1 database
-   - Variable name: DB
-5. Settings/Variables에서 ADMIN_TOKEN을 Secret으로 추가
-6. workers.dev URL 또는 shop.hasoncompany.kr 연결
-7. 재배포 후 주문 테스트
+## 업로드
+GitHub `hason-service-mall` 저장소 루트에 이 ZIP을 풀어 나온 내용물을 그대로 덮어쓰고 Commit changes 하세요.
+Cloudflare가 자동 배포합니다.
 
-## 관리자
-`/admin.html` 접속 후 ADMIN_TOKEN 입력
-
-## 결제
-현재는 주문 접수/조회/관리까지 작동하는 MVP입니다.
-카드·간편결제는 PG 계약 후 추가 연결하면 됩니다.
+`ADMIN_TOKEN`은 Runtime variables and secrets에 Secret으로 유지하세요.
