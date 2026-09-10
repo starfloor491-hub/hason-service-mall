@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>하손컴퍼니 주문관리</title>
+<style>
+:root{--bg:#f5f1e8;--paper:#fffdf8;--green:#0b5946;--line:#ded7ca;--ink:#161b18;--muted:#727872}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Pretendard,"Noto Sans KR",Arial,sans-serif;color:var(--ink)}main{max-width:1180px;margin:auto;padding:34px 20px}h1{margin:0 0 6px}.sub{color:var(--muted);font-size:13px;margin-bottom:20px}.login,.box{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:16px}.row{display:flex;gap:10px;flex-wrap:wrap}input,select,textarea,button{font:inherit}input,select,textarea{border:1px solid #d4cdbf;border-radius:9px;padding:10px;background:white}button{border:0;background:var(--green);color:white;border-radius:9px;padding:10px 14px;font-weight:900;cursor:pointer}.toolbar{display:flex;justify-content:space-between;gap:10px;align-items:center;margin:16px 0}.tableWrap{overflow:auto;background:var(--paper);border:1px solid var(--line);border-radius:16px}table{width:100%;border-collapse:collapse;min-width:980px}th,td{padding:12px;border-bottom:1px solid #ebe5da;text-align:left;font-size:12px;vertical-align:top}th{background:#eee8df;font-size:11px}.status{font-weight:900;color:var(--green)}.memo{width:210px}.small{font-size:11px;color:var(--muted)}.err{color:#a33}.hide{display:none}
+</style></head>
+<body><main>
+<h1>HASON COMPANY 주문관리</h1><div class="sub">관리자 토큰은 브라우저 세션에만 저장됩니다.</div>
+<div class="login" id="loginBox"><div class="row"><input id="token" style="flex:1" placeholder="ADMIN_TOKEN 입력"><button id="loginBtn">주문 불러오기</button></div><div id="msg" class="small"></div></div>
+<div id="app" class="hide">
+  <div class="toolbar"><b>주문 목록</b><div class="row"><select id="filter"><option value="">전체 상태</option><option>접수</option><option>작업중</option><option>수정중</option><option>완료</option><option>취소</option></select><button id="refresh">새로고침</button></div></div>
+  <div class="tableWrap"><table><thead><tr><th>주문번호</th><th>접수일</th><th>서비스</th><th>업체/담당자</th><th>연락처</th><th>요청사항</th><th>상태</th><th>관리자 메모</th><th>저장</th></tr></thead><tbody id="tbody"></tbody></table></div>
+</div>
+<script>
+let TOKEN=sessionStorage.getItem('HC_ADMIN_TOKEN')||'';
+const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+async function load(){
+  TOKEN=document.getElementById('token').value.trim()||TOKEN;
+  if(!TOKEN)return;
+  sessionStorage.setItem('HC_ADMIN_TOKEN',TOKEN);
+  const filter=document.getElementById('filter').value;
+  const r=await fetch('/api/admin/orders'+(filter?'?status='+encodeURIComponent(filter):''),{headers:{Authorization:'Bearer '+TOKEN}});
+  const j=await r.json();
+  if(!r.ok){document.getElementById('msg').textContent=j.error||'인증 실패';document.getElementById('msg').className='small err';return}
+  document.getElementById('app').classList.remove('hide');document.getElementById('msg').textContent=`${j.orders.length}건`;
+  const tbody=document.getElementById('tbody');tbody.innerHTML='';
+  j.orders.forEach(o=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td><b>${esc(o.id)}</b></td><td>${new Date(o.created_at).toLocaleString('ko-KR')}</td><td>${esc(o.service)}</td><td>${esc(o.company)}<br><span class="small">${esc(o.name)}</span></td><td>${esc(o.phone)}<br><span class="small">${esc(o.email||'')}</span></td><td>${esc(o.request||'')}</td>
+    <td><select data-status="${esc(o.id)}"><option ${o.status==='접수'?'selected':''}>접수</option><option ${o.status==='작업중'?'selected':''}>작업중</option><option ${o.status==='수정중'?'selected':''}>수정중</option><option ${o.status==='완료'?'selected':''}>완료</option><option ${o.status==='취소'?'selected':''}>취소</option></select></td>
+    <td><textarea class="memo" data-memo="${esc(o.id)}">${esc(o.admin_memo||'')}</textarea></td>
+    <td><button data-save="${esc(o.id)}">저장</button></td>`;
+    tbody.appendChild(tr);
+  });
+  document.querySelectorAll('[data-save]').forEach(b=>b.onclick=()=>save(b.dataset.save));
+}
+async function save(id){
+ const status=document.querySelector(`[data-status="${CSS.escape(id)}"]`).value;
+ const admin_memo=document.querySelector(`[data-memo="${CSS.escape(id)}"]`).value;
+ const r=await fetch('/api/admin/orders',{method:'PATCH',headers:{'Content-Type':'application/json',Authorization:'Bearer '+TOKEN},body:JSON.stringify({id,status,admin_memo})});
+ const j=await r.json(); if(!r.ok){alert(j.error||'저장 실패');return} alert('저장했습니다.');
+}
+document.getElementById('token').value=TOKEN;
+document.getElementById('loginBtn').onclick=load;document.getElementById('refresh').onclick=load;document.getElementById('filter').onchange=load;
+if(TOKEN)load();
+</script>
+</main></body></html>
