@@ -73,7 +73,7 @@
 .store-home .screen-bar{height:22px;background:#f8f9fc;display:flex;align-items:center;padding:0 10px;gap:4px}
 .store-home .screen-bar span{width:5px;height:5px;background:#ced3de;border-radius:50%}
 .store-home .screen-bar i{margin-left:auto;font-size:7px;font-style:normal;color:#42506a}
-.store-home .screen-photo{height:calc(100% - 22px);background:linear-gradient(90deg,#092345dd,#17365d33),url('/assets/building.webp') center/cover;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:24px;color:white}
+.store-home .screen-photo{height:calc(100% - 22px);background:linear-gradient(90deg,#092345dd,#17365d33),url('/assets/services/website.png') center/cover;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:24px;color:white}
 .store-home .screen-photo small{font-size:8px;letter-spacing:2px}
 .store-home .screen-photo strong{font:italic bold 34px Georgia,serif;line-height:1.05;margin:9px 0}
 .store-home .screen-photo span{font-size:10px}
